@@ -2,7 +2,8 @@
 {%block content%}
 <br>
 <div class="container form">
-    <form action="">
+    <form method="post">
+        {% csrf_token %}
         <h2>Signin Form </h2>
         <br>
         <label for="">Name: </label>
