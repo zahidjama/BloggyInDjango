@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import customUser
+from .models import customUser, posts
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from .forms import AuthForm
+from .forms import AuthForm, postUploadForm
 # Create your views here.
 
 
@@ -14,6 +14,20 @@ def home(request):
 def logoutUser(request):
     logout(request)
     return redirect("index")
+
+
+@login_required(login_url="login")
+def createPost(request):
+    form=postUploadForm(request.POST, request.FILES)
+    if form.is_valid():
+        title=form.cleaned_data['title']
+        post=form.cleaned_data['post']
+        image=form.cleaned_data['postImage']
+        obj=posts(title=title, post=post, postImage=image)
+        obj.user=request.user
+        obj.save()
+    return render(request, "createPost.html", {'form':form})
+
 
 
 def index(request):

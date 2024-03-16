@@ -1,6 +1,6 @@
 {%load static%}
 <link rel="stylesheet" href="{%static 'style.css'%}">
-
+{% if not request.user.is_authenticated %}
 <header>
     <nav>
         <ul>
@@ -11,6 +11,25 @@
         </ul>
     </nav>
 </header>
+
+{% endif %}
+
+{% if request.user.is_authenticated %}
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="/createPost">Create Post</a>
+            </li>
+            <li>    
+                <a href="/logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+{% endif %}
+
 
 {%block content%}
 
