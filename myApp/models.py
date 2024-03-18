@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from .manager import customUserManager
+from autoslug import AutoSlugField
+from tinymce.models import HTMLField
 # Create your models here.
 
 class customUser(AbstractBaseUser):
@@ -33,12 +35,12 @@ class customUser(AbstractBaseUser):
 
 class posts(models.Model):
     title=models.CharField(max_length=100)
-    post=models.TextField()
+    post=HTMLField()
     postImage=models.ImageField(upload_to="media/posts/", default="static/posts/post.jpg")
     user=models.ForeignKey(customUser, on_delete=models.CASCADE, related_name="uploader")
     upload_time=models.DateTimeField(auto_now_add=True)
     likes=models.ManyToManyField(customUser, related_name="likes")
-
+    slug=AutoSlugField(populate_from='title', default='')
     def __str__(self) -> str:
         return self.title
     

@@ -1,5 +1,20 @@
 {%extends 'base.html'%}
 
 {%block content%}
-<h2>HOme page</h2>
+<p>Select the post to read</p>
+<div class="container" style="display: ruby-text;">
+
+    {%for i in posts%}
+    
+    <a href="/read?id={{i.slug}}">
+    
+        <div class="card">
+            <div class="card-header">{{i.user.full_name}}</div>
+            <img src="media/{{i.postImage}}" alt="Blog Image" class="card-img">
+            <div class="card-body">
+            <h3 class="card-title">{{i.title}}</h3>
+        </div>
+    </a>
+   {%endfor%}
+</div>
 {%endblock%}

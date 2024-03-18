@@ -7,5 +7,6 @@ urlpatterns=[
     path("signin", views.signinFunc, name="signin"),
     path("home", views.home, name="home"),
     path("logout", views.logoutUser, name="logout"),
-    path("createPost", views.createPost, name="createPost")
+    path("createPost", views.createPost, name="createPost"),
+    path("read", views.Read, name="read")
 ]

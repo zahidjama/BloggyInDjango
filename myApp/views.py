@@ -8,7 +8,15 @@ from .forms import AuthForm, postUploadForm
 
 @login_required(login_url="login")
 def home(request):
-    return render(request, "home.html")
+    obj=posts.objects.all()
+    return render(request, "home.html", {'posts':obj})
+
+@login_required(login_url="login")
+def Read(request):
+    slug=request.GET.get("id")
+    obj=posts.objects.get(slug=slug)
+
+    return render(request, 'read.html', {'post':obj})
 
 @login_required(login_url="login")
 def logoutUser(request):

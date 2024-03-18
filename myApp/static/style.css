@@ -30,6 +30,7 @@ nav li{
     width: 85%;
     margin: auto;
     padding: 10px;
+
 }
 .form{
     width: 40%;
@@ -54,4 +55,72 @@ nav li{
     background-color: lightblue;
     border-radius: 10px;
     font-weight: bold;
+}
+
+.card {
+    width: 300px;
+    margin: 20px auto;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+.card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.card-body {
+    padding: 10px;
+}
+.card-title {
+    font-size: 1.2rem;
+    margin-top: 5px;
+}
+.post {
+    width: 80%;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#title {
+    font-size: 1.5rem;
+}
+#uploadDate {
+    font-style: italic;
+    font-size: 0.8rem;
+}
+#postImage img {
+    max-width: 100%;
+    height: auto;
+}
+#post {
+    line-height: 1.6;
+}
+#user {
+    font-style: italic;
+}
+.like-btn {
+    margin-top: 10px;
+}
+.comment {
+    margin-top: 20px;
+}
+hr {
+    margin: 20px 0;
+    border-color: aqua;
+}
+summary {
+    cursor: pointer;
 }

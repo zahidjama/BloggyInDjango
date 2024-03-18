@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+{%block content%}
+<h2>Reading blog page</h2>
+<div class="container">
+
+    <div class="post">
+        <div class="header">
+            <div id="title">{{post.title}}</div>
+            <div id="uploadDate">{{post.upload_time}}</div>
+        </div>
+        <div id="postImage"><img src="media/{{post.postImage}}" alt="Post Image"></div>
+        <div id="post">
+            <p>{{post.post | safe}}</p>
+        </div>
+        <div id="user">By {{post.user.full_name}}</div>
+        <div class="like-btn">
+            likes: 0 <button>Like</button>
+        </div>
+        <div class="comment">
+            <form action="">
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <button>Submit</button>
+            </form>
+        </div>
+        <hr>
+        <div class="comments">
+            <details>
+                <summary>username</summary>
+                <p>Comment text goes here...</p>
+            </details>
+            <!-- Add more details elements for additional comments -->
+        </div>
+    </div>
+{%endblock%}

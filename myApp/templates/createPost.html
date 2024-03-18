@@ -1,11 +1,25 @@
+
 {%extends 'base.html'%}
 
 {%block content%}
-<h2>Create Post Page</h2>
+<!-- <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script> -->
+<script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+plugins: [
+    "advlist autolink lists link image charmap print preview anchor",
+    "searchreplace visualblocks code fullscreen",
+    "insertdatetime media table contextmenu paste "
+],
+toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter      alignright alignjustify | bullist numlist outdent indent | link image"
+});
+</script>
+
+<h2>Create Post Page</h2>    
 <form method="post" enctype="multipart/form-data">
     {%csrf_token%}
     <table>
-        {{form}}
+        {{form.as_p}}
     </table>
     <button>Upload</button>
 </form>
