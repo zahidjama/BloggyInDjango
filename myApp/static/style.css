@@ -124,3 +124,11 @@ hr {
 summary {
     cursor: pointer;
 }
+.cmnt{
+    margin-top: 20px;
+    border: 1px solid gray;
+    padding: 10px;
+    min-width: 50%;
+    max-width: 60%;
+    border-radius: 10pc;
+}

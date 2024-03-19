@@ -9,5 +9,6 @@ urlpatterns=[
     path("logout", views.logoutUser, name="logout"),
     path("createPost", views.createPost, name="createPost"),
     path("read/<slug:id>", views.Read, name="read"),
-    path("like", views.addLike, name="like")
+    path("like", views.addLike, name="like"),
+    path("deletecomment", views.deleteComment, name="deletecomment")
 ]

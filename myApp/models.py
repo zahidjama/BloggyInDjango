@@ -44,3 +44,16 @@ class posts(models.Model):
     def __str__(self) -> str:
         return self.title
     
+
+class comments(models.Model):
+    id=models.AutoField(primary_key=True)
+    # commentId=models.AutoField(default=0, related_name="Id")
+    user=models.ForeignKey(customUser, on_delete=models.CASCADE)
+    post=models.ForeignKey(posts, on_delete=models.CASCADE)
+    comment=models.TextField()
+    time=models.DateTimeField(auto_now_add=True)
+    is_active=models.BooleanField(default=True)
+    def __str__(self) -> str:
+        return f"{self.user.full_name} , {self.post.title}"
+
+

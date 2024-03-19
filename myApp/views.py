@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import customUser, posts
+from .models import customUser, posts, comments
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import AuthForm, postUploadForm
@@ -13,11 +13,23 @@ def home(request):
 
 @login_required(login_url="login")
 def Read(request, id):
-    # slug=request.GET.get("id")
+    if request.method=='POST':
+        post=posts.objects.get(slug=request.POST.get("post"))
+        comment=request.POST.get("comment")
+        cmnt=comments(post=post, comment=comment, user=request.user)
+        cmnt.save()
     obj=posts.objects.get(slug=id)
     myLikes=obj.likes.all()
     totalLikes=obj.likes.count()
-    return render(request, 'read.html', {'post':obj, "myLikes":myLikes, 'totalLikes':totalLikes})
+    Comments=comments.objects.filter(post=obj, is_active=True)
+    return render(request, 'read.html', {'post':obj, "myLikes":myLikes, 'totalLikes':totalLikes, "comments": Comments})
+
+def deleteComment(request):
+    cmnt=comments.objects.get(id=request.GET.get("id"))
+    if cmnt.user==request.user:
+        cmnt.is_active=False
+        cmnt.save()
+    return redirect("read", id=cmnt.post.slug)
 
 @login_required(login_url="login")
 def addLike(request):

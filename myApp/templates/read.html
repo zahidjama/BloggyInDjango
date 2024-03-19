@@ -23,17 +23,27 @@
             {%endif%}
         </div>
         <div class="comment">
-            <form action="">
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+            <form action="" method="post">
+                {% csrf_token %}
+                <textarea name="comment" id="" cols="30" rows="10"></textarea>
+                <input type="hidden" name="post" value="{{post.slug}}">
                 <button>Submit</button>
             </form>
         </div>
         <hr>
         <div class="comments">
-            <details>
-                <summary>username</summary>
-                <p>Comment text goes here...</p>
-            </details>
+            {%for comment in comments%}
+            <div class="cmnt">
+                <details>
+                    <summary>{{comment.user.full_name}}</summary>
+                    <p>{{comment.comment}}</p>
+                    <small><i>{{comment.time}}</i></small>
+                    {% if request.user == comment.user%}
+                    <p><a href="/deletecomment?id={{comment.id}}">Delete comment</a></p>
+                    {%endif%}
+                </details>
+            </div>
+            {%endfor%}
             <!-- Add more details elements for additional comments -->
         </div>
     </div>

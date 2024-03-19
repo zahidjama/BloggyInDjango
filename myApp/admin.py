@@ -4,3 +4,4 @@ from . import models
 
 admin.site.register(models.customUser)
 admin.site.register(models.posts)
+admin.site.register(models.comments)
