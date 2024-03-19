@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import customUser, posts
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -12,11 +12,29 @@ def home(request):
     return render(request, "home.html", {'posts':obj})
 
 @login_required(login_url="login")
-def Read(request):
-    slug=request.GET.get("id")
-    obj=posts.objects.get(slug=slug)
+def Read(request, id):
+    # slug=request.GET.get("id")
+    obj=posts.objects.get(slug=id)
+    myLikes=obj.likes.all()
+    totalLikes=obj.likes.count()
+    return render(request, 'read.html', {'post':obj, "myLikes":myLikes, 'totalLikes':totalLikes})
 
-    return render(request, 'read.html', {'post':obj})
+@login_required(login_url="login")
+def addLike(request):
+    id = request.GET.get("id")
+    post = posts.objects.get(slug=id)
+    myLikes=post.likes.all()
+    user=request.user
+    if request.user in myLikes:
+        post.likes.remove(request.user)
+        user.total_likes-=1
+    else:
+        post.likes.add(request.user)
+        user.total_likes+=1
+    user.save()
+    return redirect("read", id=id)
+
+
 
 @login_required(login_url="login")
 def logoutUser(request):

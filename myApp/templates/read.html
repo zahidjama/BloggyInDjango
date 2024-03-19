@@ -8,13 +8,19 @@
             <div id="title">{{post.title}}</div>
             <div id="uploadDate">{{post.upload_time}}</div>
         </div>
-        <div id="postImage"><img src="media/{{post.postImage}}" alt="Post Image"></div>
+        <div id="postImage"><img src="/media/{{post.postImage}}" alt="Post Image"></div>
         <div id="post">
             <p>{{post.post | safe}}</p>
         </div>
         <div id="user">By {{post.user.full_name}}</div>
         <div class="like-btn">
-            likes: 0 <button>Like</button>
+            likes: {{totalLikes}}
+            {%if not request.user in myLikes%} 
+            <a href="/like?id={{post.slug}}"><button>Like</button></a>
+            {%endif%}
+            {%if request.user in myLikes%} 
+            <a href="/like?id={{post.slug}}"><button>Unlike</button></a>
+            {%endif%}
         </div>
         <div class="comment">
             <form action="">
